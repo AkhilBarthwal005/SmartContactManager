@@ -1,3 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
 body{
     background-color: #ccc;
+}
+.nav-theme{
+    background-color: #009688;
+}
+
+.banner{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.8),rgb(0,0,0,0.8)) ,url("../images/banner.jpg") no-repeat;
+    background-size: cover;
+    color: white;
+}
+@media (max-width: 450px) {
+
 }
