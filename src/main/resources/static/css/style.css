@@ -25,6 +25,12 @@ body{
 .btn:first-child:hover, :not(.btn-check)+.btn:hover{
     background-color: #067a70;
 }
+
+.my-card{
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 20px;
+}
 @media (max-width: 450px) {
 
 }
