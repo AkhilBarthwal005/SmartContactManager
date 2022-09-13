@@ -89,4 +89,19 @@ public class User {
     public void setAbout(String about) {
         this.about = about;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", enabled=" + enabled +
+                ", about='" + about + '\'' +
+                ", contacts=" + contacts +
+                '}';
+    }
 }

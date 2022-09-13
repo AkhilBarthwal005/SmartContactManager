@@ -1,11 +1,23 @@
 package com.example.smartcontactmanager.controller;
 
+import com.example.smartcontactmanager.dao.userRepository;
+import com.example.smartcontactmanager.entities.User;
+import com.example.smartcontactmanager.helper.Message;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class SmartController {
+
+    @Autowired
+    private userRepository userRepository;
 
     @GetMapping("/")
     public String homePage(Model model){
@@ -21,6 +33,29 @@ public class SmartController {
     @GetMapping("/signup")
     public String singUpPage(Model model){
         model.addAttribute("title","Signup - Smart Contact Manager");
+        model.addAttribute("user",new User());
+        return "signup";
+    }
+    @PostMapping("/register")
+    public String registration(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
+        try{
+            model.addAttribute("title","Signup - Smart Contact Manager");
+            if(!agreement){
+                System.out.println("You have not agree to our Terms and Condition");
+                throw new Exception("you have not agree to our Terms and Condition");
+            }
+            user.setRole("ROLE_USER");
+            user.setImageUrl("default.png");
+            user.setEnabled(true);
+            System.out.println(user);
+            userRepository.save(user);
+            model.addAttribute("user",new User());
+            session.setAttribute("msg",new Message("You have Successfully registered","alert-success"));
+        }catch (Exception e){
+            model.addAttribute("user",user);
+            session.setAttribute("msg",new Message(e.getMessage(),"alert-danger"));
+            e.printStackTrace();
+        }
         return "signup";
     }
 }

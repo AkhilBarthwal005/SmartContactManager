@@ -10,24 +10,29 @@
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <div class="my-card mt-4">
+          <div th:if="${session.msg}" th:classappend="${session.msg.type}" class="alert alert-dismissible fade show" role="alert">
+            <p th:text="${session.msg.content}"></p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+          </div>
           <div class="text-center my-1">
             <h2>Register Here!!</h2>
           </div>
-          <form>
+          <form th:action="@{/register}" method="post" th:object="${user}">
             <div class="form-floating mb-3">
-              <input type="text" name="name" class="form-control" id="floatingName" placeholder="Your Name">
+              <input type="text" name="name" class="form-control" id="floatingName" placeholder="Your Name" th:value="${user.name}" required>
               <label for="floatingName">Name</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="name@example.com">
+              <input type="email" name="email" class="form-control" id="floatingEmail" placeholder="name@example.com" th:value="${user.email}" required>
               <label for="floatingEmail">Email address</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+              <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password" required>
               <label for="floatingPassword">Password</label>
             </div>
             <div class="form-floating mb-3">
-              <textarea class="form-control" name="about" placeholder="Tell about yourself" id="floatingTextarea2" style="height: 100px; resize: none"></textarea>
+              <textarea class="form-control" name="about" placeholder="Tell about yourself" id="floatingTextarea2" th:text="${user.about}" style="height: 100px; resize: none" required></textarea>
               <label for="floatingTextarea2">About</label>
             </div>
             <div class="mb-3 form-check">
