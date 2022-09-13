@@ -18,6 +18,13 @@ body{
     background-size: cover;
     color: white;
 }
+
+.btn-starter{
+    background-color: #009688
+}
+.btn:first-child:hover, :not(.btn-check)+.btn:hover{
+    background-color: #067a70;
+}
 @media (max-width: 450px) {
 
 }
