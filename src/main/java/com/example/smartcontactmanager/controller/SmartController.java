@@ -4,6 +4,7 @@ import com.example.smartcontactmanager.dao.userRepository;
 import com.example.smartcontactmanager.entities.User;
 import com.example.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,9 @@ public class SmartController {
 
     @Autowired
     private userRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
     public String homePage(Model model){
@@ -54,6 +58,8 @@ public class SmartController {
             user.setRole("ROLE_USER");
             user.setImageUrl("default.png");
             user.setEnabled(true);
+            // saving encoded password to database.
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             System.out.println(user);
             userRepository.save(user);
             model.addAttribute("user",new User());

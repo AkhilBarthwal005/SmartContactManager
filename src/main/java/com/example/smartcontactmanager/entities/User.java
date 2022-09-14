@@ -19,7 +19,7 @@ public class User {
     @Column(unique = true)
     @NotBlank(message = "email id required!!")
     private String email;
-    @Size(min = 8,max = 16,message = "the length of password must be between 8 to 16!!")
+
     private String password;
     private String role;
     private String imageUrl;
