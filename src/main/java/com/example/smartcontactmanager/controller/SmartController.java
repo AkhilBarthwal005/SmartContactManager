@@ -71,4 +71,10 @@ public class SmartController {
         }
         return "signup";
     }
+
+    @GetMapping("/login")
+    public String loginPage(Model model){
+        model.addAttribute("title","Login - Smart Contact Manager");
+        return "login";
+    }
 }

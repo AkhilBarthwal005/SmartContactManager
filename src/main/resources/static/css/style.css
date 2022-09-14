@@ -25,11 +25,23 @@ body{
 .btn:first-child:hover, :not(.btn-check)+.btn:hover{
     background-color: #067a70;
 }
-
+/*  sign-in page*/
 .my-card{
     background-color: white;
     padding: 1.5rem;
     border-radius: 20px;
+}
+
+/*  login page  */
+
+#login .container #login-row #login-column #login-box {
+    margin-top: 7.5rem;
+    border: 1px solid #9C9C9C;
+    background-color: white;
+    border-radius: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
 }
 @media (max-width: 450px) {
 

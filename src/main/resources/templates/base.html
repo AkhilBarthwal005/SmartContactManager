@@ -25,7 +25,8 @@
                     <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+<!--                    here we have given a link to go user/dashboard page but if user is not log in then by default spring security will show login page to the user and if user is log in then it will redirect user to dashboard page. if its role is user-->
+                    <a class="nav-link" href="user/dashboard">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/signup}">Signup</a>
