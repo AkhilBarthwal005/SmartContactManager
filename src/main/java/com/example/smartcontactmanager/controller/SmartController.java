@@ -6,12 +6,14 @@ import com.example.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class SmartController {
@@ -37,12 +39,17 @@ public class SmartController {
         return "signup";
     }
     @PostMapping("/register")
-    public String registration(@ModelAttribute("user") User user, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
+    public String registration(@Valid @ModelAttribute("user") User user, BindingResult result, @RequestParam(value = "agreement",defaultValue = "false") boolean agreement, Model model, HttpSession session){
         try{
             model.addAttribute("title","Signup - Smart Contact Manager");
             if(!agreement){
                 System.out.println("You have not agree to our Terms and Condition");
-                throw new Exception("you have not agree to our Terms and Condition");
+                throw new Exception("You have not agree to our Terms and Condition");
+            }
+            if(result.hasErrors()){
+                System.out.println(result);
+                model.addAttribute("user",user);
+                return "signup";
             }
             user.setRole("ROLE_USER");
             user.setImageUrl("default.png");

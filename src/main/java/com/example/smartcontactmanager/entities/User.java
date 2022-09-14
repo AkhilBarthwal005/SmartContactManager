@@ -3,6 +3,8 @@ package com.example.smartcontactmanager.entities;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +13,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotBlank(message = "username must contain value!!")
+    @Size(min = 3,max = 20,message = "name must be between 3 to 12 characters!!")
     private String name;
     @Column(unique = true)
+    @NotBlank(message = "email id required!!")
     private String email;
+    @Size(min = 8,max = 16,message = "the length of password must be between 8 to 16!!")
     private String password;
     private String role;
     private String imageUrl;
