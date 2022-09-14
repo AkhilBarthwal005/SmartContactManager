@@ -32,6 +32,10 @@ body{
     border-radius: 20px;
 }
 
+.text-color{
+    color: #009688;
+}
+
 /*  login page  */
 
 #login .container #login-row #login-column #login-box {
