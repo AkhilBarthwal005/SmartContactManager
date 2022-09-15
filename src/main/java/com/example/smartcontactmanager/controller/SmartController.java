@@ -1,6 +1,6 @@
 package com.example.smartcontactmanager.controller;
 
-import com.example.smartcontactmanager.dao.userRepository;
+import com.example.smartcontactmanager.dao.UserRepository;
 import com.example.smartcontactmanager.entities.User;
 import com.example.smartcontactmanager.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ import javax.validation.Valid;
 public class SmartController {
 
     @Autowired
-    private userRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
