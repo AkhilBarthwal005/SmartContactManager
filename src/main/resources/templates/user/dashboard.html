@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="user/base::Layout(~{::section})">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <title th:text="${title}"></title>
 </head>
 <body>
     <section>

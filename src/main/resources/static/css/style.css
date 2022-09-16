@@ -2,14 +2,31 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 body{
     background-color: #ccc;
 }
+
+/* Common Style */
+.text-color{
+    color: #009688;
+}
+.form-control:focus{
+    border-color: #009688;
+}
+
+/*End of Common Style */
+
+/* Nav Bar Style*/
+
 .nav-theme{
     background-color: #009688;
 }
+
+/* End Nav Bar Style*/
+
+/* Home page Style*/
 
 .banner{
     width: 100vw;
@@ -17,6 +34,8 @@ body{
     background: linear-gradient(rgba(0,0,0,0.8),rgb(0,0,0,0.8)) ,url("../images/banner.jpg") no-repeat;
     background-size: cover;
     color: white;
+    position: fixed;
+    overflow: hidden;
 }
 
 .btn-starter{
@@ -26,16 +45,16 @@ body{
     background-color: #067a70;
 }
 
+/* End Home page Style*/
+
 /*  sign-in page*/
 .my-card{
     background-color: white;
     padding: 1.5rem;
     border-radius: 20px;
 }
+/* End  sign-in page*/
 
-.text-color{
-    color: #009688;
-}
 
 /*  login page  */
 
@@ -49,6 +68,8 @@ body{
     padding: 20px;
 }
 
+/*  End of login page  */
+
 /* Dashboard style*/
 
 .dashboard{
@@ -60,7 +81,9 @@ body{
     width: 22%;
     background-color: white;
     height: 100vh;
-    position: static;
+    position: sticky;
+    top: 0;
+    display: block;
 }
 
 .side-bar-items{
@@ -96,52 +119,69 @@ body{
 .main-content{
     width: 78%;
 }
+.menu-bar{
+    display: none;
+}
 
 
 /* End Dashboard style*/
 
 @media (max-width: 1000px){
+    /* Dashboard style*/
     .main-content{
         width: 70%;
     }
     .side-bar{
         width: 30%;
     }
+    /* End of Dashboard style*/
 }
 
 @media (max-width: 700px) {
 
-    *{
-        overflow-y: auto;
-    }
+    /* Dashboard style*/
 
-    .main-content{
+    .backdrop{
+        position: fixed;
         display: none;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0,0.5);
+        z-index: 100;
+        top: 0;
     }
-    .side-bar{
-        width: 100%;
-        display: flex;
-        align-items: center;
-    }
-    .side-bar__divider{
-        display: none;
-    }
-    .icon{
+    .menu-bar{
         display: block;
-        margin: auto;
     }
-    .side-bar-items{
-        margin: 0 auto;
-        padding: 0;
+    .mobile-font{
+        font-size: 1.4rem;
+    }
 
+    .side-bar{
+        width: 75%;
+        display: none;
+        position: sticky;
+        z-index: 101;
     }
-    .side-bar-item{
-        list-style: none;
-        padding: 0.5rem;
-        margin: 0.5rem;
-        text-align: center;
+    .side-bar-items {
+        margin: 2rem 0;
     }
-    .side-bar-item a{
-        font-size: 1.7rem;
+    .side-bar-item {
+        margin: 1rem 0;
     }
+    .side-bar-item a {
+        font-size: 1.4rem;
+    }
+    .main-content{
+        width: 100%;
+    }
+    .menu-bar a{
+        text-decoration: none;
+        color: #009688;
+        font-size: 1.2rem;
+    }
+
+
+
+    /* End Dashboard style*/
 }

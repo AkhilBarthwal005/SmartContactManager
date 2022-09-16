@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="user/base::Layout(~{::section})">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
 </head>
 <body>
-$END$
+<section>
+    <div class="card m-2">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="text-center my-3">
+                        <h1 class="text-color">Add Contact</h1>
+                    </div>
+                    <div>
+                        <form th:action="@{user/process-add-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text mobile-font" id="name"><i class="bi bi-person-square"></i></span>
+                                <input type="text" class="form-control mobile-font" placeholder="Enter Name" name="name" aria-label="Username" aria-describedby="name">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text mobile-font" id="nickName"><i class="bi bi-person-hearts"></i></span>
+                                <input type="text" class="form-control mobile-font" placeholder="Enter nick name" name="nickName" aria-label="nickName" aria-describedby="name">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text mobile-font" id="email">@</span>
+                                <input type="email" class="form-control mobile-font" placeholder="Enter email" name="email" aria-label="email" aria-describedby="name">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text mobile-font" id="work"><i class="bi bi-briefcase-fill"></i></span>
+                                <input type="text" class="form-control mobile-font" placeholder="Enter work" name="work" aria-label="work" aria-describedby="name">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text mobile-font" id="phone"><i class="bi bi-telephone-fill"></i></span>
+                                <input type="text" class="form-control mobile-font" placeholder="Enter phone number" name="phone" aria-label="phone" aria-describedby="phone">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="mobile-font form-label">Description</label>
+                                <textarea style="resize: none" class="form-control mobile-font" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="image" class="mobile-font form-label"><span class="mx-2"><i class="bi bi-person-rolodex"></i></span>Profile Picture</label>
+                                <input class="form-control mobile-font " type="file" id="image" name="image">
+                            </div>
+                            <div class="text-center">
+                                <div class="btn btn-outline-info mobile-font my-2">Submit</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
