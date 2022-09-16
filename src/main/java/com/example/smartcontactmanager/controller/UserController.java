@@ -1,5 +1,6 @@
 package com.example.smartcontactmanager.controller;
 
+import com.example.smartcontactmanager.dao.ContactRepository;
 import com.example.smartcontactmanager.dao.UserRepository;
 import com.example.smartcontactmanager.entities.Contact;
 import com.example.smartcontactmanager.entities.User;
@@ -8,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.annotation.MultipartConfig;
 import java.security.Principal;
 
 @Controller
@@ -18,6 +21,8 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ContactRepository contactRepository;
 
     @ModelAttribute
     public void addCommonDataToModal(Model model , Principal principal){
@@ -42,4 +47,19 @@ public class UserController {
         model.addAttribute("contact",new Contact());
         return "user/add_contact_form";
     }
+
+    @PostMapping("/process-add-contact")
+    public String saveContactDetails(@ModelAttribute("contact") Contact contact,Model model, Principal principal)
+    {
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        System.out.println(contact);
+        contact.setUser(user);
+        user.getContacts().add(contact);
+        contactRepository.save(contact);
+        model.addAttribute("contact",new Contact());
+        return "user/add_contact_form";
+    }
+
+
 }

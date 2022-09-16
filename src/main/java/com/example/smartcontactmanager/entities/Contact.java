@@ -1,6 +1,7 @@
 package com.example.smartcontactmanager.entities;
 
 import javax.persistence.*;
+import javax.servlet.annotation.MultipartConfig;
 
 @Entity
 public class Contact {
@@ -92,5 +93,20 @@ public class Contact {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "cId=" + cId +
+                ", name='" + name + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", work='" + work + '\'' +
+                ", phone='" + phone + '\'' +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", user=" + user +
+                '}';
     }
 }

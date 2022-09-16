@@ -96,6 +96,14 @@ public class User {
         this.about = about;
     }
 
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
     @Override
     public String toString() {
         return "User{" +
