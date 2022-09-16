@@ -76,6 +76,8 @@ body{
     display: flex;
 }
 
+
+
 /* Side bar*/
 .side-bar{
     width: 22%;
@@ -114,6 +116,11 @@ body{
 .side-bar__divider{
     height: 0.05rem;
     background-color: #ada0a0;
+}
+
+/* Add form */
+.add-form-card{
+    margin: 16px;
 }
 
 .main-content{
@@ -155,6 +162,9 @@ body{
     }
     .mobile-font{
         font-size: 1.4rem;
+    }
+    .add-form-card{
+        margin: 8px;
     }
 
     .side-bar{

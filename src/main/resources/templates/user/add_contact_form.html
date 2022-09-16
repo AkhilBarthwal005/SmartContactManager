@@ -6,7 +6,7 @@
 </head>
 <body>
 <section>
-    <div class="card m-2">
+    <div class="card add-form-card">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
@@ -14,7 +14,7 @@
                         <h1 class="text-color">Add Contact</h1>
                     </div>
                     <div>
-                        <form th:action="@{user/process-add-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
+                        <form th:action="@{/user/process-add-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
                             <div class="input-group mb-3">
                                 <span class="input-group-text mobile-font" id="name"><i class="bi bi-person-square"></i></span>
                                 <input type="text" class="form-control mobile-font" placeholder="Enter Name" name="name" aria-label="Username" aria-describedby="name">
@@ -36,15 +36,15 @@
                                 <input type="text" class="form-control mobile-font" placeholder="Enter phone number" name="phone" aria-label="phone" aria-describedby="phone">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="mobile-font form-label">Description</label>
-                                <textarea style="resize: none" class="form-control mobile-font" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <label for="description" class="mobile-font form-label">Description</label>
+                                <textarea style="resize: none" name="description" class="form-control mobile-font" id="description" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="image" class="mobile-font form-label"><span class="mx-2"><i class="bi bi-person-rolodex"></i></span>Profile Picture</label>
-                                <input class="form-control mobile-font " type="file" id="image" name="image">
+                                <label for="profilePicture" class="mobile-font form-label"><span class="mx-2"><i class="bi bi-person-rolodex"></i></span>Profile Picture</label>
+                                <input class="form-control mobile-font " type="file" id="profilePicture" name="profilePicture">
                             </div>
                             <div class="text-center">
-                                <div class="btn btn-outline-info mobile-font my-2">Submit</div>
+                                <button class="btn btn-outline-info mobile-font my-2">Submit</button>
                             </div>
                         </form>
                     </div>
