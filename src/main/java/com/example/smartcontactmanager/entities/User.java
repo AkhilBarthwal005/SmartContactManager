@@ -14,7 +14,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @NotBlank(message = "username must contain value!!")
-    @Size(min = 3,max = 20,message = "name must be between 3 to 12 characters!!")
+    @Size(min = 3,max = 20,message = "name must be between 3 to 20 characters!!")
     private String name;
     @Column(unique = true)
     @NotBlank(message = "email id required!!")

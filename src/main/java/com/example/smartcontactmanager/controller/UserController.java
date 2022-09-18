@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -55,9 +57,15 @@ public class UserController {
     }
 
     @PostMapping("/process-add-contact")
-    public String saveContactDetails(@ModelAttribute("contact") Contact contact, @RequestParam("profilePicture") MultipartFile profile, Model model, Principal principal, HttpSession session)
+    public String saveContactDetails(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, @RequestParam("profilePicture") MultipartFile profile, Model model, Principal principal, HttpSession session)
     {
         try{
+            if(result.hasErrors()){
+                System.out.println(result);
+                model.addAttribute("contact",contact);
+                return "user/add_contact_form";
+            }
+
             String name = principal.getName();
             User user = userRepository.getUserByUserName(name);
             System.out.println(contact);

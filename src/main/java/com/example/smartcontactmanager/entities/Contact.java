@@ -2,16 +2,22 @@ package com.example.smartcontactmanager.entities;
 
 import javax.persistence.*;
 import javax.servlet.annotation.MultipartConfig;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int cId;
+    @NotBlank(message = "name must contain value!!")
+    @Size(min = 3 , max = 20 , message = "name must be between 3 to 12 characters!!")
     private String name;
     private String nickName;
     private String email;
     private String work;
+    @NotBlank(message = "phone number must contain value!!")
+    @Size(min = 10 , max = 10 , message = "Phone number length must be 10 !!")
     private String phone;
     private String image;
     @Column(length = 1000)

@@ -23,7 +23,9 @@
                         <form th:action="@{/user/process-add-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
                             <div class="input-group mb-3">
                                 <span class="input-group-text mobile-font" id="name"><i class="bi bi-person-square"></i></span>
-                                <input type="text" class="form-control mobile-font" placeholder="Enter Name" name="name" aria-label="Username" aria-describedby="name">
+                                <input type="text" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''" class="form-control mobile-font" placeholder="Enter Name" name="name" aria-label="Username" aria-describedby="name" required>
+                                <div id="nameValidation" class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                </div>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text mobile-font" id="nickName"><i class="bi bi-person-hearts"></i></span>
@@ -39,7 +41,9 @@
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text mobile-font" id="phone"><i class="bi bi-telephone-fill"></i></span>
-                                <input type="text" class="form-control mobile-font" placeholder="Enter phone number" name="phone" aria-label="phone" aria-describedby="phone">
+                                <input type="text" th:classappend="${#fields.hasErrors('phone')}?'is-invalid':''" class="form-control mobile-font" placeholder="Enter phone number" name="phone" aria-label="phone" aria-describedby="phone" required>
+                                <div id="phoneValidation" class="invalid-feedback" th:each="e : ${#fields.errors('phone')}" th:text="${e}">
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="mobile-font form-label">Description</label>
