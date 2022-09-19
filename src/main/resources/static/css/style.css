@@ -163,6 +163,30 @@ body{
 
 /* Pagination End here */
 
+/* contact__profile_picture start here*/
+
+.contact__profile_picture{
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/*contact__profile_picture end here*/
+
+/* contact_name__link start here*/
+.contact_name__link{
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+}
+.contact_name__link:hover,
+.contact_name__link:active{
+    color: #009688;
+}
+
+/* contact_name__link end here*/
+
 
 /* End Dashboard style*/
 
@@ -222,6 +246,9 @@ body{
         text-decoration: none;
         color: #009688;
         font-size: 1.2rem;
+    }
+    .mob_text-center{
+        text-align: center;
     }
 
 

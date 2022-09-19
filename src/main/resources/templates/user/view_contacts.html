@@ -24,14 +24,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="c : ${contacts}">
-                            <td th:text="${c.getCId()}"></td>
-                            <td th:text="${c.getName()}"></td>
+                        <tr class="align-middle" th:each="c : ${contacts}">
+                            <td class="fw-bold" th:text="'SCM'+${c.getCId()}"></td>
+                            <td class="mob_text-center">
+                                <span class="mx-2"><img class="contact__profile_picture" th:src="@{'/images/profile/' + ${c.getImage()}}"></span>
+                                <a class="contact_name__link" th:href="@{'/user/contact/' + ${c.getCId()}}"><span th:text="${c.getName()}"></span></a>
+                            </td>
                             <td th:text="${c.getEmail()}"></td>
                             <td th:text="${c.getPhone()}"></td>
-                            <td>
+                            <td class="mob_text-center">
                                 <span class="text-danger mx-2" style="cursor: pointer"><i class="fa-solid fa-trash-can"></i></span>
-                                <span class="text-info mx-2" style="cursor: pointer"><i class="fa-sharp fa-solid fa-pencil"></i></span>
+                                <span class="text-info" style="cursor: pointer"><i class="fa-sharp fa-solid fa-pencil"></i></span>
                             </td>
                         </tr>
                         </tbody>
