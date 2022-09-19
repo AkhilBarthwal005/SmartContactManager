@@ -36,6 +36,16 @@
                         </tr>
                         </tbody>
                     </table>
+<!--                    Pagination-->
+                    <div>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li th:classappend="${currentPage == 0}?'disabled':''" class="page-item"><a class="page-link" th:href="@{'/user/view-contacts/'+ ${currentPage - 1}}">Previous</a></li>
+                                <li th:each="i : ${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage+1 == i}?'active':''" class="page-item"><a class="page-link custom-page-link" href="#" th:href="@{'/user/view-contacts/'+${i - 1}}"><span th:text="${i}"></span></a></li>
+                                <li th:classappend="${currentPage+1==totalPage}?'disabled':''" class="page-item"><a class="page-link" th:href="@{'/user/view-contacts/'+ ${currentPage + 1}}">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
             </div>
         </div>
