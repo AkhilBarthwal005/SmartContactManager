@@ -25,6 +25,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
@@ -117,9 +118,12 @@ public class UserController {
     }
 
     @GetMapping("/contact/{contact_id}")
-    public String viewContactDetialsPage(@PathVariable("contact_id") Integer currentPage ,Model model , Principal principal)
+    public String viewContactDetialsPage(@PathVariable("contact_id") Integer contact_id ,Model model , Principal principal)
     {
         model.addAttribute("title","Contact Details - Smart Contact Manager");
+        Optional<Contact> contactOptional = contactRepository.findById(contact_id);
+        Contact contact = contactOptional.get();
+        model.addAttribute("contact",contact);
         return "user/view_contact_details";
     }
 

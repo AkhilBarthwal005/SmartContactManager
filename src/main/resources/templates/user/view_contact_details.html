@@ -6,7 +6,43 @@
 </head>
 <body>
 <section>
-    <h1>Welcome to View Contact Details page</h1>
+    <div class="container my-2">
+        <div class="card">
+            <div class="card-body">
+                <div class="text-center my-2">
+                    <img style="height: 13rem; width: 13rem" class="contact__profile_picture" th:src="@{'/images/profile/' + ${contact.getImage()}}">
+                    <h4 class="my-2" th:text="${contact.getName()} + '(' + ${contact.getNickName() + ')'}"></h4>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <table class="w-50 p-3 table text-center">
+                        <thead>
+                        <tr>
+                            <th scope="col">#Id</th>
+                            <th scope="col" th:text="${contact.getCId()}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Email</th>
+                            <td th:text="${contact.getEmail()}">Mark</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Mobile No</th>
+                            <td th:text="${contact.getPhone()}">Larry the Bird</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Work</th>
+                            <td th:text="${contact.getWork()}">Jacob</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <p th:text="${contact.getDescription()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 </body>
 </html>
