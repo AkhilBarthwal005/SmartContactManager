@@ -108,7 +108,7 @@ public class UserController {
         // getting contact details
         int perPage=1;
 //        currentPage =start with 0
-        Pageable pageable = PageRequest.of(currentPage, 1);
+        Pageable pageable = PageRequest.of(currentPage, 5);
         Page<Contact> contacts = contactRepository.findAllContactsByUserId(user.getId(),pageable);
         model.addAttribute("contacts",contacts);
         model.addAttribute("currentPage",currentPage);
