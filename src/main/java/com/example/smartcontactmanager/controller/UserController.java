@@ -84,12 +84,12 @@ public class UserController {
                 contact.setImage(contact.getNickName()+"_"+ profile.getOriginalFilename());
                 Files.copy(profile.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("File uploaded");
-                session.setAttribute("msg",new Message("Your contact added successfully!!","alert-success"));
-                contact.setUser(user);
-                user.getContacts().add(contact);
-                contactRepository.save(contact);
-                model.addAttribute("contact",new Contact());
             }
+            session.setAttribute("msg",new Message("Your contact added successfully!!","alert-success"));
+            contact.setUser(user);
+            user.getContacts().add(contact);
+            contactRepository.save(contact);
+            model.addAttribute("contact",new Contact());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -114,6 +114,13 @@ public class UserController {
         model.addAttribute("currentPage",currentPage);
         model.addAttribute("totalPage",contacts.getTotalPages());
         return "user/view_contacts";
+    }
+
+    @GetMapping("/contact/{contact_id}")
+    public String viewContactDetialsPage(@PathVariable("contact_id") Integer currentPage ,Model model , Principal principal)
+    {
+        model.addAttribute("title","Contact Details - Smart Contact Manager");
+        return "user/view_contact_details";
     }
 
 
