@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" th:replace="user/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="card m-2">
+            <div class="text-center">
+                <h1>Your Contacts</h1>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile No</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="c : ${contacts}">
+                            <td th:text="${c.getCId()}"></td>
+                            <td th:text="${c.getName()}"></td>
+                            <td th:text="${c.getEmail()}"></td>
+                            <td th:text="${c.getPhone()}"></td>
+                            <td>
+                                <span class="text-danger mx-2" style="cursor: pointer"><i class="fa-solid fa-trash-can"></i></span>
+                                <span class="text-info mx-2" style="cursor: pointer"><i class="fa-sharp fa-solid fa-pencil"></i></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
@@ -22,6 +21,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -93,6 +93,19 @@ public class UserController {
             session.setAttribute("msg",new Message("Some thing went woring please try again after some time!!","alert-danger"));
         }
         return "user/add_contact_form";
+    }
+
+    @GetMapping("/view-contacts")
+    public String openViewContactPage(Model model , Principal principal)
+    {
+        model.addAttribute("title","View Contact - Smart Contact Manager");
+        // getting user
+        String name = principal.getName();
+        User user= userRepository.getUserByUserName(name);
+        // getting contact details
+        List<Contact> contacts = contactRepository.findAllContactsByUserId(user.getId());
+        model.addAttribute("contacts",contacts);
+        return "user/view_contacts";
     }
 
 
