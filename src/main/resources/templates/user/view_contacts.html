@@ -37,7 +37,7 @@
                         </tbody>
                     </table>
 <!--                    Pagination-->
-                    <div>
+                    <div class="d-flex justify-content-center">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li th:classappend="${currentPage == 0}?'disabled':''" class="page-item"><a class="page-link" th:href="@{'/user/view-contacts/'+ ${currentPage - 1}}">Previous</a></li>
