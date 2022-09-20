@@ -15,6 +15,11 @@ body{
 .form-control:focus{
     border-color: #009688;
 }
+.custom_error_icon{
+    width: 40%;
+}
+
+/* Common Style end here*/
 
 /*End of Common Style */
 
@@ -202,6 +207,12 @@ body{
 }
 
 @media (max-width: 700px) {
+
+    /* Common Style Start*/
+    .custom_error_icon{
+        width: 80%;
+    }
+    /* Common Style End*/
 
     /* Dashboard style*/
 

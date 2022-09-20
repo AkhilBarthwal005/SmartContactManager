@@ -7,7 +7,7 @@
 <body>
 <section>
     <div class="container">
-        <div class="card m-2">
+        <div class="card m-2" th:if="${contacts.getTotalPages() != 0}">
             <div class=" my-2 text-center">
                 <h1>Your Contacts</h1>
                 <div th:if="${session.msg}" th:classappend="${session.msg.type}" class="mx-2 alert alert-dismissible fade show" role="alert">
@@ -55,6 +55,17 @@
                         </nav>
                     </div>
                 </div>
+            </div>
+        </div>
+
+<!--        if contact does not exist-->
+        <div th:unless="${contacts.getTotalPages()!=0}">
+            <div class="text-center">
+                <img class="custom_error_icon" th:src="@{/images/nothing-found.png}">
+            </div>
+            <div class="text-center">
+                <h2 class="display-3">No Contacts found :)</h2>
+                <p class="fs-4">Add Your first contact</p>
             </div>
         </div>
     </div>

@@ -49,7 +49,7 @@
 <!--        if contact does not exist-->
         <div th:unless="${contact}">
             <div class=" text-center p-3 alert alert-warning" role="alert">
-                <img height="100vh" width="100vw" th:src="@{/images/warning_icon.png}">
+                <img class="custom_error_icon" th:src="@{/images/warning_icon.png}">
                 <h4 class="alert-heading">unauthorized access!</h4>
                 <p>You do not have permission to access this page.</p>
                 <hr>
