@@ -24,21 +24,25 @@
                         <tbody>
                         <tr>
                             <th scope="row">Email</th>
-                            <td th:text="${contact.getEmail()}">Mark</td>
+                            <td th:text="${contact.getEmail()}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Mobile No</th>
-                            <td th:text="${contact.getPhone()}">Larry the Bird</td>
+                            <td th:text="${contact.getPhone()}"></td>
                         </tr>
                         <tr>
                             <th scope="row">Work</th>
-                            <td th:text="${contact.getWork()}">Jacob</td>
+                            <td th:text="${contact.getWork()}"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="text-center">
                     <p th:text="${contact.getDescription()}"></p>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-info">Update</button>
+                    <button class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </div>
