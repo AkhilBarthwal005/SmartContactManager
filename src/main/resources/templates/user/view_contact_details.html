@@ -7,7 +7,7 @@
 <body>
 <section>
     <div class="container my-2">
-        <div class="card">
+        <div class="card" th:if="${contact}">
             <div class="card-body">
                 <div class="text-center my-2">
                     <img style="height: 13rem; width: 13rem" class="contact__profile_picture" th:src="@{'/images/profile/' + ${contact.getImage()}}">
@@ -44,6 +44,16 @@
                     <button class="btn btn-info">Update</button>
                     <button class="btn btn-danger">Delete</button>
                 </div>
+            </div>
+        </div>
+<!--        if contact does not exist-->
+        <div th:unless="${contact}">
+            <div class=" text-center p-3 alert alert-warning" role="alert">
+                <img height="100vh" width="100vw" th:src="@{/images/warning_icon.png}">
+                <h4 class="alert-heading">unauthorized access!</h4>
+                <p>You do not have permission to access this page.</p>
+                <hr>
+                <a class="btn text-light btn-lg btn-starter" th:href="@{/user/view-contacts/0}">Go Back</a>
             </div>
         </div>
     </div>

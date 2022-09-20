@@ -123,7 +123,13 @@ public class UserController {
         model.addAttribute("title","Contact Details - Smart Contact Manager");
         Optional<Contact> contactOptional = contactRepository.findById(contact_id);
         Contact contact = contactOptional.get();
-        model.addAttribute("contact",contact);
+
+        // getting login user.
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        if(user.getId() == contact.getUser().getId()){
+            model.addAttribute("contact",contact);
+        }
         return "user/view_contact_details";
     }
 
