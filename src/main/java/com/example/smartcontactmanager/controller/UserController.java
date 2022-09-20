@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -131,6 +132,31 @@ public class UserController {
             model.addAttribute("contact",contact);
         }
         return "user/view_contact_details";
+    }
+
+    @GetMapping("/delete/{contact_id}")
+    public String deleteContact(@PathVariable("contact_id") Integer contact_id ,Model model , Principal principal,HttpSession session)
+    {
+        Contact contact = contactRepository.findById(contact_id).get();
+
+        // getting login user.
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        if(contact.getUser().getId() == user.getId()){
+            contactRepository.delete(contact);
+            File file = null;
+            try {
+                if(!contact.getImage().equals("default.png")){
+                    file = new ClassPathResource("static/images/profile").getFile();
+                    Path path = Paths.get(file.getAbsolutePath() + File.separator +contact.getImage());
+                    Files.delete(path);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            session.setAttribute("msg", new Message("Your contact has been deleted successfully!!","alert-success"));
+        }
+        return "redirect:/user/view-contacts/0";
     }
 
 

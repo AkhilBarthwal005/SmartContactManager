@@ -19,3 +19,21 @@ backdrop.addEventListener("click",()=>{
     side_bar.style.display="none";
     main_content.style.display="block";
 })
+
+// delete contact function
+function deleteContact(cid) {
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this contact!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                window.location = "/user/delete/"+cid;
+            } else {
+                swal("Your contact is safe!");
+            }
+        });
+}

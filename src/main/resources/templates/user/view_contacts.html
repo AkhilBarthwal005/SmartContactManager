@@ -8,8 +8,13 @@
 <section>
     <div class="container">
         <div class="card m-2">
-            <div class="text-center">
+            <div class=" my-2 text-center">
                 <h1>Your Contacts</h1>
+                <div th:if="${session.msg}" th:classappend="${session.msg.type}" class="mx-2 alert alert-dismissible fade show" role="alert">
+                    <span th:text="${session.msg.content}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -33,8 +38,8 @@
                             <td th:text="${c.getEmail()}"></td>
                             <td th:text="${c.getPhone()}"></td>
                             <td class="mob_text-center">
-                                <span class="text-danger mx-2" style="cursor: pointer"><i class="fa-solid fa-trash-can"></i></span>
-                                <span class="text-info" style="cursor: pointer"><i class="fa-sharp fa-solid fa-pencil"></i></span>
+                                <a th:onclick="|deleteContact(${c.getCId()})|" class="text-danger mx-2" style="cursor: pointer"><i class="fa-solid fa-trash-can"></i></a>
+                                <a class="text-info" style="cursor: pointer"><i class="fa-sharp fa-solid fa-pencil"></i></a>
                             </td>
                         </tr>
                         </tbody>
