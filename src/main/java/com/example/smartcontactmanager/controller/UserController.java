@@ -53,13 +53,18 @@ public class UserController {
         return "user/dashboard";
     }
 
+//    Show Add Contact Page
+
     @GetMapping("/add-contact")
     public String openAddFormPage(Model model , Principal principal)
     {
         model.addAttribute("title","Add Contact - Smart Contact Manager");
+        model.addAttribute("title_of_page","Add Contact");
         model.addAttribute("contact",new Contact());
         return "user/add_contact_form";
     }
+
+//    Saving Contact Details
 
     @PostMapping("/process-add-contact")
     public String saveContactDetails(@Valid @ModelAttribute("contact") Contact contact, BindingResult result, @RequestParam("profilePicture") MultipartFile profile, Model model, Principal principal, HttpSession session)
@@ -100,6 +105,7 @@ public class UserController {
         return "user/add_contact_form";
     }
 
+//    show View Contact page
     @GetMapping("/view-contacts/{currentPage}")
     public String openViewContactPage(@PathVariable("currentPage") Integer currentPage ,Model model , Principal principal)
     {
@@ -118,8 +124,9 @@ public class UserController {
         return "user/view_contacts";
     }
 
+    // Show contact Details page
     @GetMapping("/contact/{contact_id}")
-    public String viewContactDetialsPage(@PathVariable("contact_id") Integer contact_id ,Model model , Principal principal)
+    public String viewContactDetailsPage(@PathVariable("contact_id") Integer contact_id ,Model model , Principal principal)
     {
         model.addAttribute("title","Contact Details - Smart Contact Manager");
         Optional<Contact> contactOptional = contactRepository.findById(contact_id);
@@ -133,6 +140,8 @@ public class UserController {
         }
         return "user/view_contact_details";
     }
+
+//    delete Contact
 
     @GetMapping("/delete/{contact_id}")
     public String deleteContact(@PathVariable("contact_id") Integer contact_id ,Model model , Principal principal,HttpSession session)
@@ -157,6 +166,22 @@ public class UserController {
             session.setAttribute("msg", new Message("Your contact has been deleted successfully!!","alert-success"));
         }
         return "redirect:/user/view-contacts/0";
+    }
+
+//    Update Contact
+    @GetMapping("/update-contact/{contact_id}")
+    public String openUpdateContactPage(@PathVariable("contact_id") Integer contact_id , Model model , Principal principal)
+    {
+        model.addAttribute("title","Add Contact - Smart Contact Manager");
+        model.addAttribute("title_of_page","Update Your Contact");
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        Contact contact = contactRepository.findById(contact_id).get();
+        if(user.getId() == contact.getUser().getId()){
+            model.addAttribute("contact",contact);
+            model.addAttribute("update_profile_picture_msg","(Choose only if you want to update)");
+        }
+        return "user/add_contact_form";
     }
 
 

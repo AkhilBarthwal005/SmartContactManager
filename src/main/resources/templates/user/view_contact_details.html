@@ -41,7 +41,7 @@
                     <p th:text="${contact.getDescription()}"></p>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-info">Update</button>
+                    <a th:href="@{'/user/update-contact/' + ${contact.getCId()}}" class="btn btn-info">Update</a>
                     <button th:onclick="|deleteContact(${contact.getCId()})|" class="btn btn-danger">Delete</button>
                 </div>
             </div>
