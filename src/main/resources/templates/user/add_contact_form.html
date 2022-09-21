@@ -20,7 +20,9 @@
                         <h1 class="text-color" th:text="${title_of_page}"></h1>
                     </div>
                     <div>
-                        <form th:action="@{/user/process-add-contact}" method="post" enctype="multipart/form-data" th:object="${contact}">
+                        <form th:action="@{'/user/' + ${form_process_url}}" method="post" enctype="multipart/form-data" th:object="${contact}">
+<!--                            Sending contact id -->
+                            <input type="hidden" th:value="${contact.getCId()}" name="cId">
                             <div class="input-group mb-3">
                                 <span class="input-group-text mobile-font" id="name"><i class="bi bi-person-square"></i></span>
                                 <input type="text" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''" class="form-control mobile-font" placeholder="Enter Name" name="name" aria-label="Username" aria-describedby="name" th:value="${contact.getName()}" required>

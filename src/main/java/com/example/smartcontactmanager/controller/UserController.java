@@ -61,6 +61,7 @@ public class UserController {
         model.addAttribute("title","Add Contact - Smart Contact Manager");
         model.addAttribute("title_of_page","Add Contact");
         model.addAttribute("contact",new Contact());
+        model.addAttribute("form_process_url","process-add-contact");
         return "user/add_contact_form";
     }
 
@@ -179,9 +180,45 @@ public class UserController {
         Contact contact = contactRepository.findById(contact_id).get();
         if(user.getId() == contact.getUser().getId()){
             model.addAttribute("contact",contact);
+            model.addAttribute("form_process_url","process-update-contact");
             model.addAttribute("update_profile_picture_msg","(Choose only if you want to update)");
         }
         return "user/add_contact_form";
+    }
+
+    @PostMapping("/process-update-contact")
+    public String UpdateContact(@ModelAttribute Contact contact, Model model , Principal principal,@RequestParam("cId") Integer cId,@RequestParam("profilePicture") MultipartFile profile,HttpSession session)
+    {
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        Contact old_contact = contactRepository.findById(cId).get();
+        if(user.getId() == old_contact.getUser().getId()){
+            if(profile.isEmpty()){
+                contact.setImage(old_contact.getImage());
+            }
+            else{
+                File file = null;
+                try {
+                    file = new ClassPathResource("static/images/profile").getFile();
+                // deleting old profile picture
+                    if(!old_contact.getImage().equals("default.png")) {
+                        Path path = Paths.get(file.getAbsolutePath() + File.separator + old_contact.getImage());
+                        Files.delete(path);
+                    }
+                // updating new profile picture
+                    Path path = Paths.get(file.getAbsolutePath() + File.separator +contact.getNickName()+"_"+ profile.getOriginalFilename());
+                    contact.setImage(contact.getNickName()+"_"+ profile.getOriginalFilename());
+                    Files.copy(profile.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+                    System.out.println("Profile Picture updated");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            contact.setUser(user);
+            contactRepository.save(contact);
+            session.setAttribute("msg",new Message("Contact Details are Updated Successfully","alert-success"));
+        }
+        return "redirect:/user/view-contacts/0";
     }
 
 
