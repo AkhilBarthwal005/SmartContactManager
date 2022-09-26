@@ -192,6 +192,20 @@ body{
 
 /* contact_name__link end here*/
 
+/* edit icon of profile page*/
+
+.edit-icon{
+    text-decoration: none;
+    color:#067a70;
+    cursor: pointer;
+}
+.edit-icon:active,
+.edit-icon:hover{
+    color: #009688;
+}
+
+/* edit icon of profile page*/
+
 
 /* End Dashboard style*/
 

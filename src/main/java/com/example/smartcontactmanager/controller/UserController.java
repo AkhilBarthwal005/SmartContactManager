@@ -221,5 +221,12 @@ public class UserController {
         return "redirect:/user/view-contacts/0";
     }
 
+    // showing profile page
+    @GetMapping("/view-profile")
+    public String showUserProfile(Model model){
+        model.addAttribute("title","Profile - Smart Contact Manager");
+        return "user/profile";
+    }
+
 
 }
