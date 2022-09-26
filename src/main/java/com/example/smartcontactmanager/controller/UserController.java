@@ -228,5 +228,37 @@ public class UserController {
         return "user/profile";
     }
 
+    // update user profile picture
+    @PostMapping("/update-profile-picture")
+    public String updateProfilePicture(@RequestParam("userProfilePicture") MultipartFile userProfilePicture,Model model,Principal principal,HttpSession session){
+        model.addAttribute("title","Profile - Smart Contact Manager");
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        if(userProfilePicture.isEmpty()){
+            user.setImageUrl(user.getImageUrl());
+        }
+        else{
+            File file = null;
+            try {
+                file = new ClassPathResource("static/images/userProfile").getFile();
+                // deleting old profile picture
+                if(!user.getImageUrl().equals("default.png")) {
+                    Path path = Paths.get(file.getAbsolutePath() + File.separator + user.getImageUrl());
+                    Files.delete(path);
+                }
+                // updating new profile picture
+                Path path = Paths.get(file.getAbsolutePath() + File.separator +user.getId()+"_"+ userProfilePicture.getOriginalFilename());
+                user.setImageUrl(user.getId()+"_"+ userProfilePicture.getOriginalFilename());
+                Files.copy(userProfilePicture.getInputStream(),path, StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("User Profile Picture updated");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        userRepository.save(user);
+        session.setAttribute("msg",new Message("Profile picture has been Updated Successfully","alert-success"));
+        return "redirect:/user/view-profile";
+    }
+
 
 }
