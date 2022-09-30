@@ -16,6 +16,17 @@
                     <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
                 </div>
             </div>
+
+            <!--                Search box start here-->
+            <div class=" search-container my-3 px-3">
+                <input onkeyup="search()" type="text" id="search-input" class="form-control" placeholder="Search your contact By Name...">
+
+<!--                search result-->
+                <div class="search-result">
+                </div>
+            </div>
+            <!--                Search box end here-->
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-hover">

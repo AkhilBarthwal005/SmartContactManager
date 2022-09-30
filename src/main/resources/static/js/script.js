@@ -37,3 +37,32 @@ function deleteContact(cid) {
             }
         });
 }
+
+const search = ()=>{
+    // console.log("searching...");
+    let query = $("#search-input").val();
+
+    if(query == ''){
+        $(".search-result").hide();
+    }
+    else{
+        // console.log(query);
+        let url = `http://localhost:8080/search/${query}`;
+        fetch(url).then((res)=>{
+            return res.json();
+        }).then((data)=>{
+            // console.log(data);
+            let result = `<ul class="list-group">`;
+            data.forEach(contact => {
+                result+=`<a href="/user/contact/${contact.cid}" class="list-group-item list-group-item-action">${contact.name}</a>`
+            });
+            
+            result+="</ul>";
+            $(".search-result").html(result);
+            $(".search-result").show();
+        })
+        
+    }
+
+
+}

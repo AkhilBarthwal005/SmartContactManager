@@ -1,5 +1,7 @@
 package com.example.smartcontactmanager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +26,7 @@ public class Contact {
     private String description;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public Contact() {

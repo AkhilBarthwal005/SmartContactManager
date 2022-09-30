@@ -135,6 +135,17 @@ body{
     display: none;
 }
 
+/* search css start here*/
+.search-result{
+    background: white;
+    border: 1px solid #ced4da;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0.375rem;
+    display: none;
+}
+/* search css end here*/
+
 /* Pagination start here */
 .pagination > li > a
 {
