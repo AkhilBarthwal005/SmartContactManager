@@ -32,6 +32,7 @@ public class MyConfig extends WebSecurityConfigurerAdapter {
     }
 
     // Configuration of route
+    // here we define that what type of database we want use for authentication.. it is inMemory database or normal backend database or anything else
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.authenticationProvider(authenticationProvider());
