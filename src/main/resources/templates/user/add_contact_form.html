@@ -75,6 +75,12 @@
             <a class="btn text-light btn-lg btn-starter" th:href="@{/user/view-contacts/0}">Go Back</a>
         </div>
     </div>
+    <script>
+        $(document).ready(function (){
+            $(".side-bar-item").removeClass("active-link");
+            $("#add-link").addClass("active-link");
+        })
+    </script>
 </section>
 </body>
 </html>

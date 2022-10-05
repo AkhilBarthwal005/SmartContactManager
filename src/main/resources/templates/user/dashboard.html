@@ -9,6 +9,12 @@
         <h1>Welcome to user Dashboard</h1>
         <h3>This is private dashboard only authenticate user can access it</h3>
         <h3>Your username is  : <span th:text="${user.name}"></span></h3>
+        <script>
+            $(document).ready(function (){
+                $(".side-bar-item").removeClass("active-link");
+                $("#home-link").addClass("active-link");
+            })
+        </script>
     </section>
 </body>
 </html>

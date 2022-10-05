@@ -19,6 +19,7 @@ body{
     width: 40%;
 }
 
+
 /* Common Style end here*/
 
 /*End of Common Style */
@@ -112,6 +113,12 @@ body{
     text-decoration: none;
     font-size: 1.2rem;
     color: gray;
+}
+.active-link{
+    background: #009688;
+}
+.active-link a{
+    color: white;
 }
 .side-bar-item a:hover,
 .side-bar-item a:active{
