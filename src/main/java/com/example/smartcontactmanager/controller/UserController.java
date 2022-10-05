@@ -10,6 +10,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,9 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @ModelAttribute
     public void addCommonDataToModal(Model model , Principal principal){
@@ -259,6 +263,35 @@ public class UserController {
         session.setAttribute("msg",new Message("Profile picture has been Updated Successfully","alert-success"));
         return "redirect:/user/view-profile";
     }
+
+
+    // setting page..
+    @GetMapping("/settings")
+    public String settings(Model model){
+        model.addAttribute("title","Settings - Smart Contact Manager");
+        return "user/settings";
+    }
+
+    // change password..
+    @PostMapping("/change-password")
+    public String ChangePassword(@RequestParam("oldPassword") String oldPassword,@RequestParam("newPassword") String newPassword,Principal principal,HttpSession session){
+        //getting current user..
+        String name = principal.getName();
+        User user = userRepository.getUserByUserName(name);
+        if(bCryptPasswordEncoder.matches(oldPassword,user.getPassword())){
+            user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+            userRepository.save(user);
+            session.setAttribute("msg", new Message("Your password has been changed successfully!!","alert-success"));
+        }
+        else{
+            System.out.println("old password does not match.");
+            session.setAttribute("msg", new Message("Please enter correct old password","alert-warning"));
+            return "redirect:/user/settings";
+        }
+        return "redirect:/user/dashboard";
+    }
+
+
 
 
 }

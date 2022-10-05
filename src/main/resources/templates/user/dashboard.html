@@ -6,6 +6,11 @@
 </head>
 <body>
     <section>
+        <div th:if="${session.msg}" th:classappend="${session.msg.type}" class="alert alert-dismissible fade show text-center" role="alert">
+            <span th:text="${session.msg.content}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
+        </div>
         <h1>Welcome to user Dashboard</h1>
         <h3>This is private dashboard only authenticate user can access it</h3>
         <h3>Your username is  : <span th:text="${user.name}"></span></h3>
