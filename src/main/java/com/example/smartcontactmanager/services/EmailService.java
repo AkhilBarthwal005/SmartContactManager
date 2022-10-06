@@ -58,7 +58,8 @@ public class EmailService {
 
             // adding text
 
-            mimeMessage.setText(message);
+//            mimeMessage.setText(message);
+            mimeMessage.setContent(message,"text/html");
 
 
 
