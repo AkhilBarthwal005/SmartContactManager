@@ -5,6 +5,7 @@ import com.example.smartcontactmanager.entities.User;
 import com.example.smartcontactmanager.helper.Message;
 import com.example.smartcontactmanager.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,9 @@ public class ForgetController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/forget")
     public String forgetPasswordPage(Model model){
@@ -78,7 +82,20 @@ public class ForgetController {
             return "forgetPassword";
         }
         else{
+            session.setAttribute("email",email);
             return "changePassword";
         }
+    }
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam("newPassword") String newPassword, Model model, HttpSession session){
+        // generating random number..
+        String email = (String) session.getAttribute("email");
+        User user = userRepository.getUserByUserName(email);
+
+        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+            return "redirect:/login?resetPassword=Password changed successfully";
     }
 }
