@@ -41,12 +41,11 @@
                   <input type="password" name="password" id="password" class="form-control" placeholder="password">
                 </div>
                 <div class="mb-3 d-flex justify-content-between">
-                  <div>
-                    <label for="remember-me" class="text-color"><span>Remember me</span>
-                      <span><input style="vertical-align: middle" id="remember-me" name="remember-me" type="checkbox"></span></label>
+                  <div id="forget-password-link">
+                    <a href="#" th:href="@{/forget}" class=" my-3 text-color" >Forget Password</a>
                   </div>
                   <div id="register-link">
-                    <a href="#" class=" my-3 text-color">Register here</a>
+                    <a href="#" th:href="@{/signup}" class=" my-3 text-color" >Register here</a>
                   </div>
                 </div>
                 <div class="text-center">

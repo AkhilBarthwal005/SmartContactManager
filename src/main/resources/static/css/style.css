@@ -64,14 +64,26 @@ body{
 
 /*  login page  */
 
-#login .container #login-row #login-column #login-box {
+#login .container #login-row #login-column #login-box,
+#forget .container #forget-row #forget-column #forget-box{
     margin-top: 7.5rem;
     border: 1px solid #9C9C9C;
     background-color: white;
     border-radius: 20px;
 }
-#login .container #login-row #login-column #login-box #login-form {
+#login .container #login-row #login-column #login-box #login-form,
+#forget .container #forget-row #forget-column #forget-box #forget-form{
     padding: 20px;
+}
+
+#register-link a,#forget-password-link a{
+    text-decoration: none;
+}
+#register-link a:hover,
+#register-link a:active,
+#forget-password-link a:hover,
+#forget-password-link a:active{
+    color: #067a70;
 }
 
 /*  End of login page  */
