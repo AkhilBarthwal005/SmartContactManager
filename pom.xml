@@ -68,6 +68,14 @@
             <version>2.7.3</version>
         </dependency>
 
+        <!--    This is mail api  of com.sun-->
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
     </dependencies>
 
     <build>

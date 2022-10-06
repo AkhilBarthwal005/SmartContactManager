@@ -1,6 +1,8 @@
 package com.example.smartcontactmanager.controller;
 
 import com.example.smartcontactmanager.helper.Message;
+import com.example.smartcontactmanager.services.EmailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +16,8 @@ import java.util.Random;
 public class ForgetController {
 
     Random random = new Random(1000);
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/forget")
     public String forgetPasswordPage(Model model){
@@ -26,10 +30,19 @@ public class ForgetController {
         // generating random number..
         int otp = random.nextInt(999999);
         model.addAttribute("email_id",email);
-        session.setAttribute("msg",new Message("OTP send successfully to "+email , "alert-success"));
-        model.addAttribute("otp","otp generated successfully");
-        System.out.println(email);
-        System.out.println(otp);
-        return "forgetPassword";
+
+        boolean flag = emailService.sendEmail(email, "Forget Password OTP from SCM", "OTP : " + otp);
+        if(flag){
+            session.setAttribute("msg",new Message("OTP send successfully to "+email , "alert-success"));
+            model.addAttribute("otp","otp generated successfully");
+            session.setAttribute("opt",otp);
+            System.out.println(email);
+            System.out.println(otp);
+            return "forgetPassword";
+        }
+        else{
+         session.setAttribute("msg",new Message("Please enter correct email id" , "alert-danger"));
+         return "redirect:/forget";
+        }
     }
 }
