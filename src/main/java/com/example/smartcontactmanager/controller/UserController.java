@@ -5,6 +5,10 @@ import com.example.smartcontactmanager.dao.UserRepository;
 import com.example.smartcontactmanager.entities.Contact;
 import com.example.smartcontactmanager.entities.User;
 import com.example.smartcontactmanager.helper.Message;
+import com.razorpay.Order;
+import com.razorpay.RazorpayClient;
+import com.razorpay.RazorpayException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -27,6 +31,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -291,6 +297,31 @@ public class UserController {
         return "redirect:/user/dashboard";
     }
 
+
+
+    // Making payment method...
+
+    @PostMapping("/create_order")
+    @ResponseBody
+    public String createOrder(@RequestBody Map<String, Object> data) throws Exception {
+        System.out.println(data);
+        // getting amount
+        int amount = Integer.parseInt(data.get("amount").toString());
+
+        RazorpayClient razorpayClient = new RazorpayClient("rzp_test_alpB49M5tUOFwh", "2RIy6loKdMIcqert7FHjCKRZ");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("amount",amount*100); // here we are multiplying with 100 so that rupees can be converted to paise.
+        jsonObject.put("currency","INR");
+        jsonObject.put("receipt","txn_345839");
+
+        // creating new order..
+        Order order = razorpayClient.orders.create(jsonObject);
+        System.out.println(order);
+
+        // saving order details to database.
+
+        return order.toString();
+    }
 
 
 

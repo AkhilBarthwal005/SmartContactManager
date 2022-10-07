@@ -34,6 +34,15 @@
                             <th scope="row">Work</th>
                             <td th:text="${contact.getWork()}"></td>
                         </tr>
+                        <tr>
+                            <th scope="row">Pay</th>
+                            <td class="w-50">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="payment_initiated" class="form-control " placeholder="Enter amount to be pay" name="payment_initiated">
+                                </div>
+                                <button onclick="paymentStart()" class=" mx-2 btn btn-success">Pay</button>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

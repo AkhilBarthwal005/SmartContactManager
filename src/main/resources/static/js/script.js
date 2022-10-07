@@ -66,3 +66,83 @@ const search = ()=>{
 
 
 }
+
+// Making Payment method...
+
+// initiating payment...
+
+// first request to server to create order
+
+const paymentStart = ()=>{
+    let amount = $("#payment_initiated").val();
+    console.log(amount);
+    if(amount == '' || amount == null){
+        swal("Opps!!", "payment amount is require", "error");
+        return;
+    }
+
+    // we will use ajax to send request to server to create order
+    $.ajax(
+        {
+            url: '/user/create_order',
+            data:JSON.stringify({amount:amount,info:"order request"}),
+            contentType:'application/json',
+            type:'POST',
+            dataType:'json',
+            success:function(response){
+                console.log(response);
+                if(response.status=="created"){
+                    // open payment form
+                    let options = {
+                        "key": "rzp_test_alpB49M5tUOFwh", // Enter the Key ID generated from the Dashboard
+                        "amount": response.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "Smart Contact Manager",
+                        "description": "Test Transaction",
+                        "image": "https://w7.pngwing.com/pngs/612/213/png-transparent-payment-gateway-e-commerce-payment-system-payment-gateway-icon-blue-text-service.png",
+                        "order_id": response.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                        "handler": function (response){
+                            console.log(response.razorpay_payment_id);
+                            console.log(response.razorpay_order_id);
+                            console.log(response.razorpay_signature);
+                            console.log("Payment successfully done...");
+                            swal("Congress ..", "Payment successfully done...", "success");
+                        },
+                        "prefill": {
+                            "name": "",
+                            "email": "",
+                            "contact": ""
+                        },
+                        "notes": {
+                            "address": "Smart Contact Manager Corporate Office"
+                        },
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    }
+
+                    let rzp = new Razorpay(options);
+                    rzp.on('payment.failed', function (response){
+                            console.log(response.error.code);
+                            console.log(response.error.description);
+                            console.log(response.error.source);
+                            console.log(response.error.step);
+                            console.log(response.error.reason);
+                            console.log(response.error.metadata.order_id);
+                            console.log(response.error.metadata.payment_id);
+                            console.log("Payment failed");
+                            swal("Opps!!", "Payment failed", "error");
+                    });
+
+                    rzp.open(); 
+                }
+            },
+            error:function(error){
+                console.log(error);
+                alert("Something went wrong.. please try again after some time");
+            }
+        }
+    )
+
+
+}
