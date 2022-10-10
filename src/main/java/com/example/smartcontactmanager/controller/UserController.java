@@ -1,8 +1,10 @@
 package com.example.smartcontactmanager.controller;
 
 import com.example.smartcontactmanager.dao.ContactRepository;
+import com.example.smartcontactmanager.dao.OrdersRepository;
 import com.example.smartcontactmanager.dao.UserRepository;
 import com.example.smartcontactmanager.entities.Contact;
+import com.example.smartcontactmanager.entities.Orders;
 import com.example.smartcontactmanager.entities.User;
 import com.example.smartcontactmanager.helper.Message;
 import com.razorpay.Order;
@@ -14,6 +16,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +46,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private ContactRepository contactRepository;
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -303,7 +308,7 @@ public class UserController {
 
     @PostMapping("/create_order")
     @ResponseBody
-    public String createOrder(@RequestBody Map<String, Object> data) throws Exception {
+    public String createOrder(@RequestBody Map<String, Object> data,Principal principal) throws Exception {
         System.out.println(data);
         // getting amount
         int amount = Integer.parseInt(data.get("amount").toString());
@@ -319,8 +324,28 @@ public class UserController {
         System.out.println(order);
 
         // saving order details to database.
+        Orders orders = new Orders();
+        orders.setOrderId(order.get("id"));
+        orders.setAmount(order.get("amount"));
+        orders.setPaymentId(null);
+        orders.setStatus(order.get("status"));
+        orders.setUser(userRepository.getUserByUserName(principal.getName()));
+        ordersRepository.save(orders);
 
         return order.toString();
+    }
+
+    @PostMapping("/update_order")
+    @ResponseBody
+    public ResponseEntity<?> createOrder(@RequestBody Map<String, Object> data) throws Exception {
+        System.out.println(data);
+        Orders orders = ordersRepository.findByOrderId(data.get("order_id").toString());
+        orders.setPaymentId(data.get("payment_id").toString());
+        orders.setOrderId(data.get("order_id").toString());
+        orders.setStatus("paid");
+        ordersRepository.save(orders);
+
+        return ResponseEntity.ok(Map.of("msg","updated"));
     }
 
 

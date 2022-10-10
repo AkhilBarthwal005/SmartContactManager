@@ -105,8 +105,8 @@ const paymentStart = ()=>{
                             console.log(response.razorpay_payment_id);
                             console.log(response.razorpay_order_id);
                             console.log(response.razorpay_signature);
-                            console.log("Payment successfully done...");
-                            swal("Congress ..", "Payment successfully done...", "success");
+                            SavePaymentDetailsOnServer(response.razorpay_payment_id,response.razorpay_order_id);
+                            
                         },
                         "prefill": {
                             "name": "",
@@ -139,10 +139,31 @@ const paymentStart = ()=>{
             },
             error:function(error){
                 console.log(error);
-                alert("Something went wrong.. please try again after some time");
+                swal("Something went wrong","please try again after some time","error");
             }
         }
     )
 
 
+}
+
+
+function SavePaymentDetailsOnServer(payment_id,order_id){
+    $.ajax(
+        {
+            url: '/user/update_order',
+            data:JSON.stringify({payment_id:payment_id,order_id:order_id,status:"paid"}),
+            contentType:'application/json',
+            type:'POST',
+            dataType:'json',
+            success:function(response){
+                console.log("Payment successfully done...");
+                swal("Congress ..", "Payment successfully done...", "success");
+            },
+            error:function(error){
+                console.log(error);
+                alert("Payment successfully done...","The payment is not reflected in our server please mail your payment screenshot to us.","success");
+            }
+        }
+    )
 }
