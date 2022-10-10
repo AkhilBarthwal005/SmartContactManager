@@ -24,6 +24,9 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/user/dashboard}">Home</a>
                 </li>
                 <li class="nav-item">
+                    <a class="btn btn-light rounded-pill text-dark" aria-current="page" data-bs-toggle="modal" data-bs-target="#donateModal">Donate</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
                 <li class="nav-item">
@@ -38,6 +41,37 @@
 </nav>
 
 <!--    Nav-Bar end-->
+
+<!-- Modal start here -->
+
+<!-- Modal -->
+<div class="modal fade" id="donateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Donate us for our Growth..</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Pay</th>
+                            <td class="w-50">
+                                    <input type="text" id="payment_initiated" class="form-control " placeholder="Enter amount to be pay" name="payment_initiated">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button onclick="paymentStart()" class=" mx-2 btn btn-success">Pay</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal end here -->
 
 <!-- backdrop-->
     <div class="backdrop"></div>
