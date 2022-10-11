@@ -11,15 +11,18 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <th:block th:text="${#session.removeAttribute('msg')}"></th:block>
         </div>
-        <h1>Welcome to user Dashboard</h1>
-        <h3>This is private dashboard only authenticate user can access it</h3>
-        <h3>Your username is  : <span th:text="${user.name}"></span></h3>
+        <div class="dashboard_banner d-flex justify-content-center align-items-center">
+            <div class="text-center">
+                <h1 class="display-3">Welcome to Smart Contact Manager</h1>
+                <p>Start Managing your contact smartly By Start adding to cloud.</p>
+            </div>
+        </div>
         <script>
             $(document).ready(function (){
                 $(".side-bar-item").removeClass("active-link");
                 $("#home-link").addClass("active-link");
             })
         </script>
-    </section>
+    </div>
 </body>
 </html>

@@ -93,6 +93,14 @@ body{
 .dashboard{
     display: flex;
 }
+.dashboard_banner{
+    width: 78vw;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5),rgb(0,0,0,0.5)) ,url("../images/SmartContactManager.jpg") no-repeat;
+    background-size: cover;
+    color: white;
+    overflow: hidden;
+}
 
 
 
@@ -260,6 +268,16 @@ body{
 
     /* Dashboard style*/
 
+    .dashboard_banner{
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(rgba(0,0,0,0.5),rgb(0,0,0,0.5)) ,url("../images/SmartContactManager.jpg") no-repeat;
+        background-size: cover;
+        color: white;
+        overflow: hidden;
+
+    }
+
     .backdrop{
         position: fixed;
         display: none;
@@ -271,6 +289,7 @@ body{
     }
     .menu-bar{
         display: block;
+        position: absolute;
     }
     .mobile-font{
         font-size: 1.4rem;
